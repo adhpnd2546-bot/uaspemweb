@@ -1,0 +1,56 @@
+body {
+    font-family: 'Outfit', sans-serif;
+    color: #2d3436;
+    background-color: #fdfdfd;
+}
+
+.bg-success-dark {
+    background-color: #1b4d3e !important;
+}
+
+.text-success-green {
+    color: #27ae60 !important;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, #1b4d3e 0%, #27ae60 100%);
+    color: white;
+    padding: 100px 0;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.card-lahan {
+    border: none;
+    border-radius: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.card-lahan:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.stat-card {
+    border: none;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    padding: 20px;
+}
+
+.search-box {
+    border-radius: 50px;
+    padding: 15px 25px;
+    border: 2px solid #eee;
+}
+
+.badge-status {
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
