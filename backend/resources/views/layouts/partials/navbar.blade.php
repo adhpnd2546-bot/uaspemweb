@@ -2,7 +2,7 @@
     
     <!-- Left: Hamburger & Search -->
     <div class="flex items-center gap-3 flex-1">
-        <button class="lg:hidden text-heading hover:bg-black/5 p-1 rounded-md transition-colors" @click="sidebarOpen = true">
+        <button class="lg:hidden text-heading hover:bg-slate-100 p-1 rounded-md transition-colors" @click="sidebarOpen = true">
             <span class="material-symbols-outlined text-[24px]">menu</span>
         </button>
         
@@ -14,29 +14,67 @@
 
     <!-- Right: Profile & Notifications -->
     <div class="flex items-center gap-4 flex-shrink-0">
+        @php
+            $role = auth()->user()->role;
+            $notifList = [];
+
+            $tindakan = \App\Models\KunjunganLahan::where('status_tindak_lanjut', 'perlu_tindakan')->with('lahan.petani')->latest()->take(3)->get();
+            $linkTindak = match($role) { 'admin' => route('admin.kunjungan'), default => route('petugas.kunjungan.index') };
+            foreach ($tindakan as $k) {
+                $notifList[] = ['icon' => 'emergency', 'color' => 'text-warning', 'title' => $k->lahan->nama_lahan ?? '-', 'desc' => 'Perlu tindakan lanjut', 'link' => $linkTindak ];
+            }
+
+            $lahanBlm = \App\Models\Lahan::whereDoesntHave('kunjungan')->with('petani')->latest()->take(3)->get();
+            $linkLahan = match($role) { 'admin' => route('admin.lahan.show', 0), default => '#' };
+            foreach ($lahanBlm as $l) {
+                $link = $role === 'admin' ? route('admin.lahan.show', $l->id) : $linkLahan;
+                $notifList[] = ['icon' => 'warning', 'color' => 'text-danger', 'title' => $l->nama_lahan, 'desc' => 'Belum pernah dikunjungi', 'link' => $link ];
+            }
+
+            $notifList = array_slice($notifList, 0, 5);
+            $totalNotif = count($notifList);
+        @endphp
         <!-- Notification -->
         <div class="relative" x-data="{ open: false }">
-            <button class="relative p-1.5 text-body hover:bg-black/5 rounded-full transition-colors" @click="open = !open">
+            <button class="relative p-1.5 text-body hover:bg-slate-100 rounded-full transition-colors" @click="open = !open">
                 <span class="material-symbols-outlined text-[22px]">notifications</span>
-                <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-danger border-2 border-white box-content"></span>
+                @if($totalNotif > 0)
+                <span class="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-danger border-2 border-white box-content text-white text-[10px] font-bold flex items-center justify-center">{{ $totalNotif > 9 ? '9+' : $totalNotif }}</span>
+                @endif
             </button>
             
             <!-- Notification Dropdown -->
-            <div x-show="open" @click.outside="open = false" x-transition.opacity.duration.200ms class="absolute right-0 mt-2 w-72 bg-white rounded-md shadow-card border border-border py-2 z-50" x-cloak>
-                <div class="px-4 py-2 border-b border-border mb-2">
+            <div x-show="open" @click.outside="open = false" x-transition.opacity.duration.200ms class="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-card border border-border py-2 z-50" x-cloak>
+                <div class="px-4 py-2 border-b border-border">
                     <h6 class="text-[14px] font-semibold text-heading m-0">Notifikasi</h6>
                 </div>
-                <a href="#" class="block px-4 py-2 hover:bg-black/5 transition-colors">
-                    <p class="text-[13px] font-medium text-heading mb-1">Panen Blok A Siap!</p>
-                    <p class="text-[12px] text-muted">Estimasi hasil 2.5 ton.</p>
-                </a>
+                @if(count($notifList) > 0)
+                    @foreach($notifList as $n)
+                    <a href="{{ $n['link'] }}" class="flex items-start gap-3 px-4 py-3 hover:bg-slate-50 transition-colors border-b border-border/50 last:border-0">
+                        <span class="material-symbols-outlined text-[20px] {{ $n['color'] }} flex-shrink-0 mt-0.5">{{ $n['icon'] }}</span>
+                        <div class="min-w-0">
+                            <p class="text-[13px] font-medium text-heading mb-0.5 truncate">{{ $n['title'] }}</p>
+                            <p class="text-[12px] text-muted m-0">{{ $n['desc'] }}</p>
+                        </div>
+                    </a>
+                    @endforeach
+                @else
+                    <div class="px-4 py-6 text-center">
+                        <span class="material-symbols-outlined text-[28px] text-muted block mb-2">check_circle</span>
+                        <p class="text-[13px] text-muted m-0">Tidak ada notifikasi</p>
+                    </div>
+                @endif
             </div>
         </div>
 
         @php
-            $isPetugas = session('user_role') === 'petugas';
-            $userName = $isPetugas ? 'Petugas Lapang' : 'Ahmad Manager';
-            $userRole = $isPetugas ? 'Field Operations' : 'Administrator';
+            $user = auth()->user();
+            $userName = $user?->name ?? 'Administrator';
+            $userRole = match($user?->role) {
+                'admin' => 'Administrator',
+                'petugas' => 'Field Operations',
+                default => 'User',
+            };
         @endphp
 
         <!-- Profile Avatar -->
@@ -56,16 +94,16 @@
                     </div>
                 </div>
                 <div class="py-1">
-                    <a href="#" class="flex items-center gap-2 px-4 py-2 text-[14px] text-body hover:bg-black/5 transition-colors">
-                        <span class="material-symbols-outlined text-[18px] text-muted">person</span> Profil
+                    <a href="{{ route('profile.edit') }}" class="group flex items-center gap-2 px-4 py-2 text-[14px] text-body hover:bg-primary/5 hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined text-[18px] text-muted group-hover:text-primary transition-colors">person</span> Profil
                     </a>
-                    <a href="#" class="flex items-center gap-2 px-4 py-2 text-[14px] text-body hover:bg-black/5 transition-colors">
-                        <span class="material-symbols-outlined text-[18px] text-muted">settings</span> Pengaturan
+                    <a href="{{ route('profile.edit') }}" class="group flex items-center gap-2 px-4 py-2 text-[14px] text-body hover:bg-primary/5 hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined text-[18px] text-muted group-hover:text-primary transition-colors">settings</span> Pengaturan
                     </a>
                 </div>
                 <div class="border-t border-border py-1">
-                    <button onclick="confirmLogout()" class="w-full flex items-center gap-2 px-4 py-2 text-[14px] text-body hover:bg-black/5 transition-colors text-left">
-                        <span class="material-symbols-outlined text-[18px] text-muted">power_settings_new</span> Keluar
+                    <button onclick="confirmLogout()" class="group w-full flex items-center gap-2 px-4 py-2 text-[14px] text-body hover:bg-danger/10 hover:text-danger transition-colors text-left">
+                        <span class="material-symbols-outlined text-[18px] text-muted group-hover:text-danger transition-colors">power_settings_new</span> Keluar
                     </button>
                 </div>
             </div>

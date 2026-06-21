@@ -57,7 +57,7 @@
     </style>
 </head>
 
-<body class="font-sans antialiased text-midnight_text dark:text-white dark:bg-darkmode min-h-screen flex">
+<body class="font-sans antialiased text-midnight_text min-h-screen flex">
     
     <!-- Left Panel: Graphic & Context (Immersive Floating UI over Majestic Landscape) -->
     <div class="hidden lg:flex lg:w-7/12 relative overflow-hidden items-center justify-center p-12">
@@ -105,7 +105,7 @@
         </div>
 
         <!-- Floating Soil Widget (Center Left) -->
-        <div class="absolute top-1/3 left-12 w-56 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-5 shadow-[0_20px_40px_rgba(0,0,0,0.2)] transform -rotate-3 hover:rotate-0 hover:-translate-y-2 transition-all duration-500 cursor-default">
+        <div class="absolute top-[18%] left-12 w-56 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-5 shadow-[0_20px_40px_rgba(0,0,0,0.2)] transform -rotate-3 hover:rotate-0 hover:-translate-y-2 transition-all duration-500 cursor-default">
             <div class="flex items-center gap-3 mb-3">
                 <div class="w-10 h-10 rounded-full bg-blue-500/20 border border-blue-400/30 flex items-center justify-center">
                     <span class="material-symbols-outlined text-blue-300 text-xl">water_drop</span>
@@ -122,7 +122,7 @@
         </div>
 
         <!-- Floating Notification (Bottom Right) -->
-        <div class="absolute bottom-32 right-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 shadow-[0_20px_40px_rgba(0,0,0,0.2)] flex items-center gap-4 hover:-translate-y-1 transition-all duration-500 cursor-default">
+        <div class="absolute bottom-32 right-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 shadow-[0_20px_40px_rgba(0,0,0,0.2)] flex items-center gap-4 hover:-translate-y-1 transition-all duration-500 cursor-default">
             <div class="relative flex h-3 w-3">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a3e635] opacity-75"></span>
               <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
@@ -136,11 +136,11 @@
     </div>
 
     <!-- Right Panel: Login Form Area (Ultra Clean & Aesthetic) -->
-    <div class="w-full lg:w-5/12 bg-white dark:bg-[#09090b] flex flex-col justify-center px-8 py-12 sm:px-16 lg:px-24 relative overflow-y-auto z-20">
+    <div class="w-full lg:w-5/12 bg-white flex flex-col justify-center px-8 py-12 sm:px-16 lg:px-24 relative overflow-y-auto z-20">
         
         <div class="w-full max-w-[360px] mx-auto">
             <!-- Back Link -->
-            <a class="inline-flex items-center gap-2 text-[13px] font-medium text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors mb-12" href="/">
+            <a class="inline-flex items-center gap-2 text-[13px] font-medium text-gray-400 hover:text-gray-900 transition-colors mb-12" href="/">
                 <span class="material-symbols-outlined text-[16px]">arrow_back</span>
                 Kembali
             </a>
@@ -150,56 +150,68 @@
                 <div class="w-8 h-8 rounded bg-emerald-500/10 flex items-center justify-center">
                     <span class="material-symbols-outlined text-emerald-600 text-[18px]" style="font-variation-settings: 'FILL' 1;">grass</span>
                 </div>
-                <span class="font-medium text-lg tracking-tight text-gray-900 dark:text-white">TaniPantau</span>
+                <span class="font-medium text-lg tracking-tight text-gray-900">TaniPantau</span>
             </div>
             
             <!-- Form Header -->
             <div class="mb-8">
-                <h2 class="text-[28px] font-semibold tracking-tight text-gray-900 dark:text-white mb-2">Masuk ke akun Anda</h2>
-                <p class="text-[15px] text-gray-500 dark:text-gray-400">Masukkan detail Anda di bawah ini untuk melanjutkan.</p>
+                <h2 class="text-[28px] font-semibold tracking-tight text-gray-900 mb-2">Masuk ke akun Anda</h2>
+                <p class="text-[15px] text-gray-500">Masukkan detail Anda di bawah ini untuk melanjutkan.</p>
             </div>
             
             <!-- Login Form -->
-            <form id="loginForm" action="{{ route('login.post') }}" class="space-y-5" method="POST">
+            <form id="loginForm" action="{{ route('login') }}" class="space-y-5" method="POST">
                 @csrf
                 <!-- Input: Email/Username -->
                 <div class="space-y-2">
-                    <label class="block text-[13px] font-medium text-gray-700 dark:text-gray-300" for="username">Email atau Username</label>
-                    <input class="block w-full px-4 py-2.5 bg-transparent border border-gray-200 dark:border-white/10 rounded-lg text-[15px] text-gray-900 dark:text-white placeholder-gray-400 focus:bg-white dark:focus:bg-[#09090b] focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition-all focus-visible:outline-none" id="username" name="username" placeholder="nama@perusahaan.com" required="" type="text" />
+                    <label class="block text-[13px] font-medium text-gray-700" for="email">Email</label>
+                    <input class="block w-full px-4 py-2.5 bg-transparent border border-gray-200 rounded-lg text-[15px] text-gray-900 placeholder-gray-400 focus:bg-white focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition-all focus-visible:outline-none @error('email') border-red-500 @enderror" id="email" name="email" placeholder="nama@perusahaan.com" required="" type="email" />
+                    @error('email') <p class="text-[13px] text-red-500 mt-1">{{ $message }}</p> @enderror
                 </div>
                 
                 <!-- Input: Password -->
                 <div class="space-y-2">
                     <div class="flex justify-between items-center">
-                        <label class="block text-[13px] font-medium text-gray-700 dark:text-gray-300" for="password">Kata Sandi</label>
-                        <a class="text-[13px] text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors" href="#">Lupa sandi?</a>
+                        <label class="block text-[13px] font-medium text-gray-700" for="password">Kata Sandi</label>
+                        <a class="text-[13px] text-gray-500 hover:text-gray-900 transition-colors" href="{{ route('password.request') }}">Lupa sandi?</a>
                     </div>
                     <div class="relative">
-                        <input class="block w-full px-4 py-2.5 bg-transparent border border-gray-200 dark:border-white/10 rounded-lg text-[15px] text-gray-900 dark:text-white placeholder-gray-400 focus:bg-white dark:focus:bg-[#09090b] focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition-all focus-visible:outline-none" id="password" name="password" placeholder="••••••••" required="" type="password" />
+                        <input class="block w-full px-4 py-2.5 pr-10 bg-transparent border border-gray-200 rounded-lg text-[15px] text-gray-900 placeholder-gray-400 focus:bg-white focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 transition-all focus-visible:outline-none @error('password') border-red-500 @enderror" id="password" name="password" placeholder="••••••••" required="" type="password" />
+                        <button type="button" onclick="togglePassword()" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 transition-colors">
+                            <span id="eyeIcon" class="material-symbols-outlined text-[20px]">visibility</span>
+                        </button>
+                        @error('password') <p class="text-[13px] text-red-500 mt-1">{{ $message }}</p> @enderror
                     </div>
                 </div>
                 
                 <!-- Submit Button -->
-                <button class="w-full py-2.5 px-4 mt-6 bg-[#0a0a0a] hover:bg-black dark:bg-white dark:hover:bg-gray-100 text-white dark:text-[#0a0a0a] rounded-lg font-medium text-[15px] shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" type="submit">
+                <button class="w-full py-2.5 px-4 mt-6 bg-primary hover:bg-primary_hover text-white rounded-lg font-medium text-[15px] shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" type="submit">
                     Lanjutkan
                 </button>
             </form>
             
             <!-- Demo Accounts Section -->
             <div class="mt-10 text-center">
-                <p class="text-[13px] text-gray-500 mb-4">Gunakan akses cepat (Demo)</p>
+                <p class="text-[13px] text-gray-500 mb-2">Demo</p>
                 <div class="flex items-center justify-center gap-3 text-[13px] font-medium">
-                    <button onclick="loginAs('admin')" class="text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors" type="button">Admin</button>
-                    <span class="text-gray-300 dark:text-gray-700">•</span>
-                    <button onclick="loginAs('petugas')" class="text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors" type="button">Petugas</button>
+                    <button onclick="loginAs('admin')" class="text-gray-700 underline underline-offset-2 hover:text-emerald-600 transition-colors" type="button">Admin</button>
+                    <span class="text-gray-300">|</span>
+                    <button onclick="loginAs('petugas')" class="text-gray-700 underline underline-offset-2 hover:text-emerald-600 transition-colors" type="button">Petugas</button>
+
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+        function togglePassword() {
+            const p = document.getElementById('password');
+            const e = document.getElementById('eyeIcon');
+            if (p.type === 'password') { p.type = 'text'; e.textContent = 'visibility_off'; }
+            else { p.type = 'password'; e.textContent = 'visibility'; }
+        }
         function loginAs(role) {
-            document.getElementById('username').value = role + '@' + role + '.com';
+            document.getElementById('email').value = role + '@' + role + '.com';
             document.getElementById('password').value = '123';
             document.getElementById('loginForm').submit();
         }

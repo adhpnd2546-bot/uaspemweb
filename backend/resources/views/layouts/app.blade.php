@@ -62,6 +62,9 @@
         ::-webkit-scrollbar-thumb:hover { background: #b4bdc6; }
     </style>
     
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     @stack('styles')
 </head>
 
@@ -78,7 +81,7 @@
         </div>
 
         <!-- Sidebar Start -->
-        @if(session('user_role') === 'petugas')
+        @if(auth()->user()?->role === 'petugas')
             @include('layouts.partials.sidebar-petugas')
         @else
             @include('layouts.partials.sidebar-admin')
@@ -102,32 +105,10 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
-    @if(session('login_success'))
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                background: '#dcfce7',
-                color: '#166534',
-                customClass: {
-                    popup: 'swal-success-popup'
-                },
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            });
-            Toast.fire({
-                title: 'Berhasil masuk!'
-            });
-        });
+        window.addEventListener('pageshow', function(e) { if (e.persisted) window.location.reload(); });
     </script>
-    @endif
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">@csrf</form>
     <script>
         function confirmLogout() {
             Swal.fire({
@@ -147,7 +128,7 @@
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = '/logout';
+                    document.getElementById('logout-form').submit();
                 }
             });
         }

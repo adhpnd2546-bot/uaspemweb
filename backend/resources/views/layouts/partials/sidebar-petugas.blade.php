@@ -23,7 +23,7 @@
         
         <!-- Data Entry (Active) -->
         <li>
-            <a href="{{ route('petugas.kunjungan.create') }}" class="flex items-center justify-between px-4 py-2.5 rounded-[0.375rem] {{ request()->routeIs('petugas.kunjungan.create') ? 'bg-primary/10 text-primary font-medium' : 'text-body hover:bg-black/5' }} transition-colors">
+            <a href="{{ route('petugas.kunjungan.create') }}" class="flex items-center justify-between px-4 py-2.5 rounded-[0.375rem] {{ request()->routeIs('petugas.kunjungan.create') ? 'bg-primary/10 text-primary font-medium' : 'text-body hover:bg-primary/5 hover:text-primary' }} transition-colors">
                 <div class="flex items-center gap-3">
                     <span class="material-symbols-outlined text-[20px]" {{ request()->routeIs('petugas.kunjungan.create') ? 'style=font-variation-settings:\'FILL\'1;' : '' }}>edit_note</span>
                     <span class="text-[15px]">Data Entry</span>
@@ -33,9 +33,9 @@
         
         <!-- History -->
         <li>
-            <a href="#" class="flex items-center justify-between px-4 py-2.5 rounded-[0.375rem] text-body hover:bg-black/5 transition-colors group">
+            <a href="{{ route('petugas.kunjungan.index') }}" class="flex items-center justify-between px-4 py-2.5 rounded-[0.375rem] {{ request()->routeIs('petugas.kunjungan.index') ? 'bg-primary/10 text-primary font-medium' : 'text-body hover:bg-primary/5 hover:text-primary' }} transition-colors group">
                 <div class="flex items-center gap-3">
-                    <span class="material-symbols-outlined text-[20px] text-muted group-hover:text-body transition-colors">history</span>
+                    <span class="material-symbols-outlined text-[20px] text-muted group-hover:text-primary transition-colors {{ request()->routeIs('petugas.kunjungan.index') ? '!text-primary' : '' }}">history</span>
                     <span class="text-[15px]">Riwayat</span>
                 </div>
             </a>
@@ -43,9 +43,9 @@
         
         <!-- Settings -->
         <li>
-            <a href="#" class="flex items-center justify-between px-4 py-2.5 rounded-[0.375rem] text-body hover:bg-black/5 transition-colors group mt-4">
+            <a href="{{ route('profile.edit') }}" class="flex items-center justify-between px-4 py-2.5 rounded-[0.375rem] {{ request()->routeIs('profile.edit') ? 'bg-primary/10 text-primary font-medium' : 'text-body hover:bg-primary/5 hover:text-primary' }} transition-colors group mt-4">
                 <div class="flex items-center gap-3">
-                    <span class="material-symbols-outlined text-[20px] text-muted group-hover:text-body transition-colors">settings</span>
+                    <span class="material-symbols-outlined text-[20px] text-muted group-hover:text-primary transition-colors {{ request()->routeIs('profile.edit') ? '!text-primary' : '' }}">settings</span>
                     <span class="text-[15px]">Pengaturan</span>
                 </div>
             </a>

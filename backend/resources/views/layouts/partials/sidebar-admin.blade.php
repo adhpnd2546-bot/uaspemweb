@@ -23,9 +23,9 @@
         
         <!-- Dashboard -->
         <li>
-            <a href="{{ route('admin.dashboard') }}" class="flex items-center justify-between px-4 py-2.5 rounded-[0.375rem] {{ request()->routeIs('admin.dashboard') ? 'bg-primary/10 text-primary font-medium' : 'text-body hover:bg-black/5' }} transition-colors group">
+            <a href="{{ route('admin.dashboard') }}" class="flex items-center justify-between px-4 py-2.5 rounded-[0.375rem] {{ request()->routeIs('admin.dashboard') ? 'bg-primary/10 text-primary font-medium' : 'text-body hover:bg-primary/5 hover:text-primary' }} transition-colors group">
                 <div class="flex items-center gap-3">
-                    <span class="material-symbols-outlined text-[20px] {{ request()->routeIs('admin.dashboard') ? '' : 'text-muted group-hover:text-body' }} transition-colors" {{ request()->routeIs('admin.dashboard') ? 'style=font-variation-settings:\'FILL\'1;' : '' }}>home</span>
+                    <span class="material-symbols-outlined text-[20px] {{ request()->routeIs('admin.dashboard') ? '' : 'text-muted group-hover:text-primary' }} transition-colors" {{ request()->routeIs('admin.dashboard') ? 'style=font-variation-settings:\'FILL\'1;' : '' }}>home</span>
                     <span class="text-[15px]">Analitik</span>
                 </div>
             </a>
@@ -33,9 +33,9 @@
         
         <!-- Lahan -->
         <li>
-            <a href="{{ route('admin.lahan') }}" class="flex items-center justify-between px-4 py-2.5 rounded-[0.375rem] {{ request()->routeIs('admin.lahan*') ? 'bg-primary/10 text-primary font-medium' : 'text-body hover:bg-black/5' }} transition-colors group">
+            <a href="{{ route('admin.lahan.index') }}" class="flex items-center justify-between px-4 py-2.5 rounded-[0.375rem] {{ request()->routeIs('admin.lahan*') ? 'bg-primary/10 text-primary font-medium' : 'text-body hover:bg-primary/5 hover:text-primary' }} transition-colors group">
                 <div class="flex items-center gap-3">
-                    <span class="material-symbols-outlined text-[20px] {{ request()->routeIs('admin.lahan*') ? '' : 'text-muted group-hover:text-body' }} transition-colors" {{ request()->routeIs('admin.lahan*') ? 'style=font-variation-settings:\'FILL\'1;' : '' }}>landscape</span>
+                    <span class="material-symbols-outlined text-[20px] {{ request()->routeIs('admin.lahan*') ? '' : 'text-muted group-hover:text-primary' }} transition-colors" {{ request()->routeIs('admin.lahan*') ? 'style=font-variation-settings:\'FILL\'1;' : '' }}>landscape</span>
                     <span class="text-[15px]">Area Lahan</span>
                 </div>
             </a>
@@ -43,9 +43,9 @@
         
         <!-- Petugas -->
         <li>
-            <a href="{{ route('admin.petani') }}" class="flex items-center justify-between px-4 py-2.5 rounded-[0.375rem] {{ request()->routeIs('admin.petani*') ? 'bg-primary/10 text-primary font-medium' : 'text-body hover:bg-black/5' }} transition-colors group">
+            <a href="{{ route('admin.petani.index') }}" class="flex items-center justify-between px-4 py-2.5 rounded-[0.375rem] {{ request()->routeIs('admin.petani*') ? 'bg-primary/10 text-primary font-medium' : 'text-body hover:bg-primary/5 hover:text-primary' }} transition-colors group">
                 <div class="flex items-center gap-3">
-                    <span class="material-symbols-outlined text-[20px] {{ request()->routeIs('admin.petani*') ? '' : 'text-muted group-hover:text-body' }} transition-colors" {{ request()->routeIs('admin.petani*') ? 'style=font-variation-settings:\'FILL\'1;' : '' }}>group</span>
+                    <span class="material-symbols-outlined text-[20px] {{ request()->routeIs('admin.petani*') ? '' : 'text-muted group-hover:text-primary' }} transition-colors" {{ request()->routeIs('admin.petani*') ? 'style=font-variation-settings:\'FILL\'1;' : '' }}>group</span>
                     <span class="text-[15px]">Data Petani</span>
                 </div>
             </a>
@@ -56,32 +56,22 @@
             <span class="text-[11px] font-medium uppercase text-muted tracking-widest relative before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-2 before:h-[1px] before:bg-muted ml-3">Manajemen</span>
         </li>
 
-        <!-- Irigasi -->
+        <!-- Kunjungan -->
         <li>
-            <a href="#" class="flex items-center justify-between px-4 py-2.5 rounded-[0.375rem] text-body hover:bg-black/5 transition-colors group">
+            <a href="{{ route('admin.kunjungan') }}" class="flex items-center justify-between px-4 py-2.5 rounded-[0.375rem] {{ request()->routeIs('admin.kunjungan*') ? 'bg-primary/10 text-primary font-medium' : 'text-body hover:bg-primary/5 hover:text-primary' }} transition-colors group">
                 <div class="flex items-center gap-3">
-                    <span class="material-symbols-outlined text-[20px] text-muted group-hover:text-body transition-colors">water_drop</span>
-                    <span class="text-[15px]">Kontrol Irigasi</span>
+                    <span class="material-symbols-outlined text-[20px] text-muted group-hover:text-primary transition-colors">fact_check</span>
+                    <span class="text-[15px]">Riwayat Kunjungan</span>
                 </div>
             </a>
         </li>
         
-        <!-- Panen -->
+        <!-- Petugas -->
         <li>
-            <a href="#" class="flex items-center justify-between px-4 py-2.5 rounded-[0.375rem] text-body hover:bg-black/5 transition-colors group">
+            <a href="{{ route('admin.petugas') }}" class="flex items-center justify-between px-4 py-2.5 rounded-[0.375rem] {{ request()->routeIs('admin.petugas*') ? 'bg-primary/10 text-primary font-medium' : 'text-body hover:bg-primary/5 hover:text-primary' }} transition-colors group">
                 <div class="flex items-center gap-3">
-                    <span class="material-symbols-outlined text-[20px] text-muted group-hover:text-body transition-colors">agriculture</span>
-                    <span class="text-[15px]">Manajemen Panen</span>
-                </div>
-            </a>
-        </li>
-        
-        <!-- Settings -->
-        <li>
-            <a href="#" class="flex items-center justify-between px-4 py-2.5 rounded-[0.375rem] text-body hover:bg-black/5 transition-colors group mt-4">
-                <div class="flex items-center gap-3">
-                    <span class="material-symbols-outlined text-[20px] text-muted group-hover:text-body transition-colors">settings</span>
-                    <span class="text-[15px]">Pengaturan</span>
+                    <span class="material-symbols-outlined text-[20px] text-muted group-hover:text-primary transition-colors">badge</span>
+                    <span class="text-[15px]">Petugas Lapang</span>
                 </div>
             </a>
         </li>

@@ -76,12 +76,10 @@
         <nav class="hidden lg:flex flex-grow items-center justify-center space-x-6 font-medium">
             <a href="#" class="text-primary font-bold">Beranda</a>
             <a href="/public/lahan" class="text-midnight_text dark:text-white hover:text-primary transition-colors">Daftar Lahan</a>
-            <a href="#" class="text-midnight_text dark:text-white hover:text-primary transition-colors">Cari Lahan</a>
-            <a href="#" class="text-midnight_text dark:text-white hover:text-primary transition-colors">Artikel</a>
+            <a href="/public/artikel" class="text-midnight_text dark:text-white hover:text-primary transition-colors">Artikel</a>
         </nav>
         <div class="flex items-center space-x-4">
-            <a class="hidden lg:block bg-transparent border border-primary text-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition duration-300" href="/login">Sign In</a>
-            <a class="hidden lg:block bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary_hover transition duration-300" href="#">Sign Up</a>
+            <a class="hidden lg:block bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary_hover transition duration-300 font-semibold" href="/login">Login</a>
         </div>
     </div>
 </header>
@@ -510,9 +508,9 @@
                 <div class="w-full">
                     <h4 class="mb-6 text-xl font-bold font-heading text-white">Navigasi</h4>
                     <ul class="space-y-4">
-                        <li><a href="#" class="text-gray hover:text-white transition-colors">Beranda</a></li>
+                        <li><a href="/" class="text-gray hover:text-white transition-colors">Beranda</a></li>
                         <li><a href="/public/lahan" class="text-gray hover:text-white transition-colors">Daftar Lahan</a></li>
-                        <li><a href="#" class="text-gray hover:text-white transition-colors">Peta Sebaran</a></li>
+                        <li><a href="/public/artikel" class="text-gray hover:text-white transition-colors">Artikel</a></li>
                         <li><a href="#" class="text-gray hover:text-white transition-colors">Kalkulator Panen</a></li>
                     </ul>
                 </div>

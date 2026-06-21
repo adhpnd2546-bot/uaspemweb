@@ -45,41 +45,39 @@
     .transition-bento { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 </style>
 </head>
-<body class="font-sans antialiased text-midnight_text dark:text-white dark:bg-darkmode flex flex-col min-h-screen">
+<body class="font-sans antialiased text-midnight_text flex flex-col min-h-screen">
 <!-- TopNavBar -->
-<header class="fixed top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-border dark:bg-darkmode/90 dark:border-gray/30 transition-all shadow-sm">
+<header class="fixed top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-border transition-all shadow-sm">
     <div class="container mx-auto lg:max-w-screen-xl md:max-w-screen-md flex items-center justify-between px-4 py-6 transition-all duration-300">
         <a href="/" class="flex items-center gap-2 text-primary font-heading font-bold text-2xl">
             <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1; font-size: 32px;">eco</span>
             TaniPantau
         </a>
         <nav class="hidden lg:flex flex-grow items-center justify-center space-x-6 font-medium">
-            <a href="/" class="text-midnight_text dark:text-white hover:text-primary transition-colors">Beranda</a>
+            <a href="/" class="text-midnight_text hover:text-primary transition-colors">Beranda</a>
             <a href="/public/lahan" class="text-primary font-bold">Daftar Lahan</a>
-            <a href="#" class="text-midnight_text dark:text-white hover:text-primary transition-colors">Cari Lahan</a>
-            <a href="#" class="text-midnight_text dark:text-white hover:text-primary transition-colors">Artikel</a>
+            <a href="/public/artikel" class="text-midnight_text hover:text-primary transition-colors">Artikel</a>
         </nav>
         <div class="flex items-center space-x-4">
-            <a class="hidden lg:block bg-transparent border border-primary text-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition duration-300" href="/login">Sign In</a>
-            <a class="hidden lg:block bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary_hover transition duration-300" href="#">Sign Up</a>
+            <a class="hidden lg:block bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary_hover transition duration-300 font-semibold" href="/login">Login</a>
         </div>
     </div>
 </header>
 
-<main class="flex-grow dark:bg-darklight bg-light pt-36 pb-12">
+<main class="flex-grow bg-light pt-36 pb-12">
     <div class="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
         <!-- Page Header -->
         <div class="mb-12" data-aos="fade-down">
-            <h1 class="text-4xl md:text-5xl font-bold text-midnight_text dark:text-white font-heading mb-4">Daftar Lahan Pertanian</h1>
+            <h1 class="text-4xl md:text-5xl font-bold text-midnight_text font-heading mb-4">Daftar Lahan Pertanian</h1>
             <p class="text-lg text-gray max-w-2xl">Pantau dan jelajahi area pertanian yang terdaftar dalam ekosistem TaniPantau. Temukan lahan dengan potensi komoditas terbaik.</p>
             
             <!-- Search & Filter Bar -->
             <div class="mt-8 flex flex-col md:flex-row gap-4 max-w-3xl">
                 <div class="relative flex-grow">
                     <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray">search</span>
-                    <input class="w-full py-3 pl-12 pr-4 rounded-xl border border-border focus:border-primary focus:ring-1 focus:ring-primary text-base bg-white dark:bg-darkmode dark:border-gray/30 dark:text-white transition-bento shadow-sm" placeholder="Cari nama lahan, petani, atau lokasi..." type="text"/>
+                    <input class="w-full py-3 pl-12 pr-4 rounded-xl border border-border focus:border-primary focus:ring-1 focus:ring-primary text-base bg-white transition-bento shadow-sm" placeholder="Cari nama lahan, petani, atau lokasi..." type="text"/>
                 </div>
-                <button class="bg-white dark:bg-darkmode text-midnight_text dark:text-white border border-border dark:border-gray/30 hover:border-primary dark:hover:border-primary px-6 py-3 rounded-xl font-medium transition-bento flex items-center justify-center gap-2 shadow-sm">
+                <button class="bg-white text-midnight_text border border-border hover:border-primary px-6 py-3 rounded-xl font-medium transition-bento flex items-center justify-center gap-2 shadow-sm">
                     <span class="material-symbols-outlined">filter_list</span>
                     Filter
                 </button>
@@ -89,7 +87,7 @@
         <!-- Grid Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Card 1 -->
-            <div class="bg-white dark:bg-darkmode rounded-2xl overflow-hidden shadow-lg border border-border dark:border-gray/20 transition hover:-translate-y-2 duration-300" data-aos="fade-up" data-aos-delay="100">
+            <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-border transition hover:-translate-y-2 duration-300" data-aos="fade-up" data-aos-delay="100">
                 <div class="relative h-60">
                     <img src="https://loremflickr.com/600/400/sawah,paddy/all?lock=10" class="w-full h-full object-cover" alt="Sawah">
                     <div class="absolute top-4 left-4">
@@ -97,21 +95,21 @@
                     </div>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-2xl font-bold text-midnight_text dark:text-white mb-2 font-heading">Sawah Blok A - Sumber Makmur</h3>
+                    <h3 class="text-2xl font-bold text-midnight_text mb-2 font-heading">Sawah Blok A - Sumber Makmur</h3>
                     <p class="text-gray mb-4 flex items-center gap-2 font-medium">
                         <span class="material-symbols-outlined text-[18px]">person</span> Budi Santoso
                     </p>
-                    <div class="flex justify-between items-center border-t border-border dark:border-gray/30 pt-4 mb-4">
+                    <div class="flex justify-between items-center border-t border-border pt-4 mb-4">
                         <div>
                             <p class="text-xs text-gray font-bold uppercase tracking-wider mb-1">Komoditas</p>
                             <p class="text-primary font-bold text-lg">Padi Inpari 32</p>
                         </div>
                         <div class="text-right">
                             <p class="text-xs text-gray font-bold uppercase tracking-wider mb-1">Luas Area</p>
-                            <p class="text-midnight_text dark:text-white font-bold text-lg">2.5 Hektar</p>
+                            <p class="text-midnight_text font-bold text-lg">2.5 Hektar</p>
                         </div>
                     </div>
-                    <div class="flex items-center justify-between mt-2 pt-4 border-t border-border dark:border-gray/30">
+                    <div class="flex items-center justify-between mt-2 pt-4 border-t border-border">
                         <span class="text-sm font-medium text-gray flex items-center gap-1">
                             <span class="material-symbols-outlined text-[16px]">location_on</span> Ds. Sukamaju
                         </span>
@@ -123,7 +121,7 @@
             </div>
 
             <!-- Card 2 -->
-            <div class="bg-white dark:bg-darkmode rounded-2xl overflow-hidden shadow-lg border border-border dark:border-gray/20 transition hover:-translate-y-2 duration-300" data-aos="fade-up" data-aos-delay="200">
+            <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-border transition hover:-translate-y-2 duration-300" data-aos="fade-up" data-aos-delay="200">
                 <div class="relative h-60">
                     <img src="https://loremflickr.com/600/400/corn,farm/all?lock=11" class="w-full h-full object-cover" alt="Jagung">
                     <div class="absolute top-4 left-4">
@@ -131,21 +129,21 @@
                     </div>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-2xl font-bold text-midnight_text dark:text-white mb-2 font-heading">Ladang Jagung Timur</h3>
+                    <h3 class="text-2xl font-bold text-midnight_text mb-2 font-heading">Ladang Jagung Timur</h3>
                     <p class="text-gray mb-4 flex items-center gap-2 font-medium">
                         <span class="material-symbols-outlined text-[18px]">person</span> Ahmad Dahlan
                     </p>
-                    <div class="flex justify-between items-center border-t border-border dark:border-gray/30 pt-4 mb-4">
+                    <div class="flex justify-between items-center border-t border-border pt-4 mb-4">
                         <div>
                             <p class="text-xs text-gray font-bold uppercase tracking-wider mb-1">Komoditas</p>
                             <p class="text-yellow-600 font-bold text-lg">Jagung Manis</p>
                         </div>
                         <div class="text-right">
                             <p class="text-xs text-gray font-bold uppercase tracking-wider mb-1">Luas Area</p>
-                            <p class="text-midnight_text dark:text-white font-bold text-lg">1.2 Hektar</p>
+                            <p class="text-midnight_text font-bold text-lg">1.2 Hektar</p>
                         </div>
                     </div>
-                    <div class="flex items-center justify-between mt-2 pt-4 border-t border-border dark:border-gray/30">
+                    <div class="flex items-center justify-between mt-2 pt-4 border-t border-border">
                         <span class="text-sm font-medium text-gray flex items-center gap-1">
                             <span class="material-symbols-outlined text-[16px]">location_on</span> Ds. Karanganyar
                         </span>
@@ -157,7 +155,7 @@
             </div>
 
             <!-- Card 3 -->
-            <div class="bg-white dark:bg-darkmode rounded-2xl overflow-hidden shadow-lg border border-border dark:border-gray/20 transition hover:-translate-y-2 duration-300" data-aos="fade-up" data-aos-delay="300">
+            <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-border transition hover:-translate-y-2 duration-300" data-aos="fade-up" data-aos-delay="300">
                 <div class="relative h-60">
                     <img src="https://loremflickr.com/600/400/soybean,field/all?lock=12" class="w-full h-full object-cover" alt="Kedelai">
                     <div class="absolute top-4 left-4">
@@ -165,21 +163,21 @@
                     </div>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-2xl font-bold text-midnight_text dark:text-white mb-2 font-heading">Kebun Kedelai Lestari</h3>
+                    <h3 class="text-2xl font-bold text-midnight_text mb-2 font-heading">Kebun Kedelai Lestari</h3>
                     <p class="text-gray mb-4 flex items-center gap-2 font-medium">
                         <span class="material-symbols-outlined text-[18px]">person</span> Siti Aminah
                     </p>
-                    <div class="flex justify-between items-center border-t border-border dark:border-gray/30 pt-4 mb-4">
+                    <div class="flex justify-between items-center border-t border-border pt-4 mb-4">
                         <div>
                             <p class="text-xs text-gray font-bold uppercase tracking-wider mb-1">Komoditas</p>
                             <p class="text-primary font-bold text-lg">Kedelai</p>
                         </div>
                         <div class="text-right">
                             <p class="text-xs text-gray font-bold uppercase tracking-wider mb-1">Luas Area</p>
-                            <p class="text-midnight_text dark:text-white font-bold text-lg">3.0 Hektar</p>
+                            <p class="text-midnight_text font-bold text-lg">3.0 Hektar</p>
                         </div>
                     </div>
-                    <div class="flex items-center justify-between mt-2 pt-4 border-t border-border dark:border-gray/30">
+                    <div class="flex items-center justify-between mt-2 pt-4 border-t border-border">
                         <span class="text-sm font-medium text-gray flex items-center gap-1">
                             <span class="material-symbols-outlined text-[16px]">location_on</span> Ds. Tani Jaya
                         </span>
@@ -191,29 +189,29 @@
             </div>
 
             <!-- Card 4 -->
-            <div class="bg-white dark:bg-darkmode rounded-2xl overflow-hidden shadow-lg border border-border dark:border-gray/20 transition hover:-translate-y-2 duration-300" data-aos="fade-up" data-aos-delay="400">
-                <div class="relative h-60 bg-gray/10 dark:bg-gray/20 flex items-center justify-center">
+            <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-border transition hover:-translate-y-2 duration-300" data-aos="fade-up" data-aos-delay="400">
+                <div class="relative h-60 bg-gray/10 flex items-center justify-center">
                     <span class="material-symbols-outlined text-6xl text-gray/40">landscape</span>
                     <div class="absolute top-4 left-4">
                         <span class="bg-gray text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-md">TERBENGKALAI</span>
                     </div>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-2xl font-bold text-midnight_text dark:text-white mb-2 font-heading">Petak Kosong B-12</h3>
+                    <h3 class="text-2xl font-bold text-midnight_text mb-2 font-heading">Petak Kosong B-12</h3>
                     <p class="text-gray mb-4 flex items-center gap-2 font-medium">
                         <span class="material-symbols-outlined text-[18px]">person</span> Koperasi Unit Desa
                     </p>
-                    <div class="flex justify-between items-center border-t border-border dark:border-gray/30 pt-4 mb-4">
+                    <div class="flex justify-between items-center border-t border-border pt-4 mb-4">
                         <div>
                             <p class="text-xs text-gray font-bold uppercase tracking-wider mb-1">Komoditas</p>
                             <p class="text-gray font-bold text-lg">- Kosong -</p>
                         </div>
                         <div class="text-right">
                             <p class="text-xs text-gray font-bold uppercase tracking-wider mb-1">Luas Area</p>
-                            <p class="text-midnight_text dark:text-white font-bold text-lg">0.8 Hektar</p>
+                            <p class="text-midnight_text font-bold text-lg">0.8 Hektar</p>
                         </div>
                     </div>
-                    <div class="flex items-center justify-between mt-2 pt-4 border-t border-border dark:border-gray/30">
+                    <div class="flex items-center justify-between mt-2 pt-4 border-t border-border">
                         <span class="text-sm font-medium text-gray flex items-center gap-1">
                             <span class="material-symbols-outlined text-[16px]">location_on</span> Ds. Karanganyar
                         </span>
@@ -229,15 +227,15 @@
         <!-- Pagination -->
         <div class="flex justify-center mt-16" data-aos="fade-up">
             <nav class="flex items-center gap-2">
-                <button class="w-10 h-10 rounded-lg flex items-center justify-center text-gray hover:bg-border dark:hover:bg-gray/20 transition-colors disabled:opacity-50" disabled="">
+                <button class="w-10 h-10 rounded-lg flex items-center justify-center text-gray hover:bg-border transition-colors disabled:opacity-50" disabled="">
                     <span class="material-symbols-outlined">chevron_left</span>
                 </button>
                 <button class="w-10 h-10 rounded-lg bg-primary text-white font-bold shadow-md transition-bento">1</button>
-                <button class="w-10 h-10 rounded-lg text-midnight_text dark:text-white hover:bg-border dark:hover:bg-gray/20 font-medium transition-colors">2</button>
-                <button class="w-10 h-10 rounded-lg text-midnight_text dark:text-white hover:bg-border dark:hover:bg-gray/20 font-medium transition-colors">3</button>
+                <button class="w-10 h-10 rounded-lg text-midnight_text hover:bg-border font-medium transition-colors">2</button>
+                <button class="w-10 h-10 rounded-lg text-midnight_text hover:bg-border font-medium transition-colors">3</button>
                 <span class="w-10 h-10 flex items-center justify-center text-gray">...</span>
-                <button class="w-10 h-10 rounded-lg text-midnight_text dark:text-white hover:bg-border dark:hover:bg-gray/20 font-medium transition-colors">12</button>
-                <button class="w-10 h-10 rounded-lg flex items-center justify-center text-midnight_text dark:text-white hover:bg-border dark:hover:bg-gray/20 transition-colors">
+                <button class="w-10 h-10 rounded-lg text-midnight_text hover:bg-border font-medium transition-colors">12</button>
+                <button class="w-10 h-10 rounded-lg flex items-center justify-center text-midnight_text hover:bg-border transition-colors">
                     <span class="material-symbols-outlined">chevron_right</span>
                 </button>
             </nav>
@@ -266,7 +264,7 @@
                     <ul class="space-y-4">
                         <li><a href="/" class="text-gray hover:text-white transition-colors">Beranda</a></li>
                         <li><a href="/public/lahan" class="text-gray hover:text-white transition-colors">Daftar Lahan</a></li>
-                        <li><a href="#" class="text-gray hover:text-white transition-colors">Peta Sebaran</a></li>
+                        <li><a href="/public/artikel" class="text-gray hover:text-white transition-colors">Artikel</a></li>
                         <li><a href="#" class="text-gray hover:text-white transition-colors">Kalkulator Panen</a></li>
                     </ul>
                 </div>

@@ -1,46 +1,40 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\PetaniController;
+use App\Http\Controllers\Admin\LahanController;
+use App\Http\Controllers\Admin\KunjunganController;
 
 /*
 |--------------------------------------------------------------------------
-| Public & Guest Routes
+| Public Routes (guest only)
 |--------------------------------------------------------------------------
 */
-Route::middleware('guest')->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('home');
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
 
-    Route::get('/login', function () {
-        return view('auth.login');
-    })->name('login');
+Route::get('/dashboard', function () {
+    $role = auth()->user()?->role;
 
-    Route::post('/login', function (\Illuminate\Http\Request $request) {
-        $username = $request->input('username');
-        $password = $request->input('password');
+    if ($role === 'manajer') {
+        return redirect('http://127.0.0.1:8000/frontend/index.php');
+    }
 
-        if ($username === 'admin@admin.com' && $password === '123') {
-            session(['user_role' => 'admin']);
-            return redirect()->route('admin.dashboard')->with('login_success', 'admin');
-        } elseif ($username === 'petugas@petugas.com' && $password === '123') {
-            session(['user_role' => 'petugas']);
-            return redirect()->route('petugas.kunjungan.create')->with('login_success', 'petugas');
-        }
-
-        return redirect()->route('login')->with('error', 'Email atau Password salah!');
-    })->name('login.post');
-});
-
-Route::get('/logout', function (\Illuminate\Http\Request $request) {
-    $request->session()->flush();
-    return redirect()->route('login');
-})->name('logout');
+    return redirect(match($role) {
+        'admin' => route('admin.dashboard'),
+        'petugas' => route('petugas.kunjungan.create'),
+        default => route('home'),
+    });
+})->middleware('auth')->name('dashboard');
 
 Route::get('/public/lahan', function () {
     return view('public.lahan');
 })->name('public.lahan');
 
+Route::get('/public/artikel', function () {
+    return view('public.artikel');
+})->name('public.artikel');
 
 /*
 |--------------------------------------------------------------------------
@@ -49,29 +43,36 @@ Route::get('/public/lahan', function () {
 */
 Route::prefix('admin')
     ->name('admin.')
-    ->middleware(['role:admin']) 
+    ->middleware(['auth', 'role:admin'])
     ->group(function () {
-        
+
         Route::get('/dashboard', function () {
-            return view('admin.dashboard');
+            $totalPetani = \App\Models\Petani::count();
+            $totalLahan = \App\Models\Lahan::count();
+            $totalKunjungan = \App\Models\KunjunganLahan::count();
+            $lahanPerluTindakan = \App\Models\KunjunganLahan::where('status_tindak_lanjut', 'perlu_tindakan')
+                ->distinct('lahan_id')->count('lahan_id');
+            $lahanTerbaru = \App\Models\Lahan::with('petani')->latest()->take(5)->get();
+            $totalPetugas = \App\Models\User::where('role', 'petugas')->count();
+
+            return view('admin.dashboard', compact(
+                'totalPetani', 'totalLahan', 'totalKunjungan',
+                'lahanPerluTindakan', 'lahanTerbaru', 'totalPetugas'
+            ));
         })->name('dashboard');
 
-        Route::prefix('lahan')->group(function () {
-            Route::get('/', function () {
-                return view('admin.lahan');
-            })->name('lahan'); // diakses via route('admin.lahan')
-            
-            Route::get('/detail', function () {
-                return view('admin.lahan-detail');
-            })->name('lahan.detail'); // diakses via route('admin.lahan.detail')
-        });
+        Route::resource('petani', PetaniController::class)->except(['show']);
 
-        Route::get('/petani', function () {
-            return view('admin.petani');
-        })->name('petani');
-        
-});
+        Route::resource('lahan', LahanController::class);
 
+        Route::get('/kunjungan', [KunjunganController::class, 'index'])->name('kunjungan');
+        Route::post('/kunjungan', [KunjunganController::class, 'store'])->name('kunjungan.store');
+
+        Route::get('/petugas', function () {
+            $petugas = \App\Models\User::where('role', 'petugas')->get();
+            return view('admin.petugas', compact('petugas'));
+        })->name('petugas');
+    });
 
 /*
 |--------------------------------------------------------------------------
@@ -80,13 +81,30 @@ Route::prefix('admin')
 */
 Route::prefix('petugas')
     ->name('petugas.')
-    ->middleware(['role:petugas'])
+    ->middleware(['auth', 'role:petugas'])
     ->group(function () {
-        
+
         Route::prefix('kunjungan')->group(function () {
-            Route::get('/create', function () {
-                return view('petugas.kunjungan-create');
-            })->name('kunjungan.create'); // diakses via route('petugas.kunjungan.create')
+            Route::get('/', [KunjunganController::class, 'riwayatPetugas'])->name('kunjungan.index');
+            Route::get('/create', [KunjunganController::class, 'create'])->name('kunjungan.create');
+            Route::post('/store', [KunjunganController::class, 'store'])->name('kunjungan.store');
         });
-        
+    });
+
+/*
+|--------------------------------------------------------------------------
+| Profile Routes (shared across all roles)
+|--------------------------------------------------------------------------
+*/
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [App\Http\Controllers\ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+/*
+|--------------------------------------------------------------------------
+| Breeze Auth Routes (login, register, logout, etc.)
+|--------------------------------------------------------------------------
+*/
+require __DIR__.'/auth.php';
