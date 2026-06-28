@@ -24,9 +24,9 @@ Aplikasi monitoring lahan pertanian dan kunjungan petugas lapangan. Sistem digun
 - Data dummy/simulasi (NIK dan nomor HP bukan data asli)
 
 ## Teknologi
-- Backend: Laravel 12, MySQL, REST API, Sanctum Auth
-- Frontend: PHP Native, HTML/CSS/Bootstrap 5, Leaflet.js, Alpine.js
-- Tools: cURL, SweetAlert2, Google Fonts, Material Symbols
+- Backend: Laravel 12, MySQL, REST API, Sanctum Auth, Alpine.js, Tailwind CSS
+- Frontend Publik: PHP Native, Bootstrap 5, Leaflet.js, AOS, Bootstrap Icons
+- Tools: Google Fonts, Material Symbols, SweetAlert2
 
 ## Cara Instalasi
 1. Clone repository
@@ -55,15 +55,16 @@ Aplikasi monitoring lahan pertanian dan kunjungan petugas lapangan. Sistem digun
 
 ## Akun Demo
 
-| Peran   | Email               | Password   |
-|---------|---------------------|------------|
-| Admin   | admin@example.com   | password   |
-| Petugas | petugas@example.com | password   |
-| Manajer | manajer@example.com | password   |
+| Peran   | Email                 | Password |
+|---------|-----------------------|----------|
+| Admin   | admin@admin.com       | 123      |
+| Petugas | petugas@petugas.com   | 123      |
+| Petugas | petugas2@petugas2.com | 123      |
+| Manajer | manajer@manajer.com   | 123      |
 
 ## Link Deploy
-- Frontend: (belum di-deploy)
-- Backend/Admin: (belum di-deploy)
+- Frontend: https://pantautani.rf.gd/
+- Backend/Admin: https://adminpantautani.rf.gd/login
 
 ## Endpoint API
 
